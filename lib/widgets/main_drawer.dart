@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MainDrawer extends StatelessWidget {
+  const MainDrawer({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     String imageUrl =
@@ -14,8 +16,8 @@ class MainDrawer extends StatelessWidget {
             padding: EdgeInsets.zero,
             child: UserAccountsDrawerHeader(
               margin: EdgeInsets.zero,
-              accountName: Text('Yash Chavan'),
-              accountEmail: Text('email@yashchavan.com'),
+              accountName: const Text('Yash Chavan'),
+              accountEmail: const Text('email@yashchavan.com'),
               currentAccountPicture: CircleAvatar(
                 backgroundImage: NetworkImage(imageUrl),
               ),
