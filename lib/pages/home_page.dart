@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_codepur/widgets/main_drawer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,17 +18,11 @@ class HomePage extends StatelessWidget {
             onPressed: () {
               sKey.currentState!.openEndDrawer();
             },
-            icon: const Icon(Icons.payments),
+            icon: const Icon(CupertinoIcons.money_dollar_circle),
           )
         ],
       ),
-      drawer: Drawer(
-        child: Column(
-          children: const [
-            Text('Hi'),
-          ],
-        ),
-      ),
+      drawer: MainDrawer(),
       endDrawer: Drawer(
         child: Column(
           children: const [
