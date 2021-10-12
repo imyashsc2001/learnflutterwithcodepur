@@ -64,62 +64,8 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: CatalogModel.products.isNotEmpty
-          ? getListView()
+          ? const ItemWidget(isGrid: true)
           : const Center(child: CircularProgressIndicator()),
-    );
-  }
-
-  getListView() {
-    // return ListView.builder(
-    //     itemCount: CatalogModel.products.length,
-    //     itemBuilder: (context, index) {
-    //       return ItemWidget(
-    //         item: CatalogModel.products[index],
-    //       );
-    //     });
-
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        mainAxisSpacing: 16,
-        crossAxisSpacing: 16,
-      ),
-      itemCount: CatalogModel.products.length,
-      itemBuilder: (context, index) {
-        var item = CatalogModel.products[index];
-        return Card(
-          clipBehavior: Clip.antiAlias,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              AspectRatio(
-                aspectRatio: 18.0 / 11.0,
-                child: Image.network(item.image),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(item.name),
-                    const SizedBox(height: 8.0),
-                    Row(
-                      children: [
-                        Text('\$ ${item.price}'),
-                        const Spacer(),
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: const Text('Buy'),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        );
-      },
     );
   }
 }
