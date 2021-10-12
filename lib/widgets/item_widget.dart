@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_codepur/models/catalog.dart';
 
 class ItemWidget extends StatelessWidget {
+  // final VoidCallback onTap;
+  final Function(Item item) onItemClicked;
   final bool isGrid;
 
   const ItemWidget({
     Key? key,
+    required this.onItemClicked,
     required this.isGrid,
   }) : super(key: key);
 
@@ -29,7 +32,10 @@ class ItemWidget extends StatelessWidget {
                   children: <Widget>[
                     AspectRatio(
                       aspectRatio: 18.0 / 11.0,
-                      child: Image.network(item.image),
+                      child: Hero(
+                        tag: Key(item.id.toString()),
+                        child: Image.network(item.image),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
@@ -40,10 +46,18 @@ class ItemWidget extends StatelessWidget {
                           const SizedBox(height: 8.0),
                           Row(
                             children: [
-                              Text('\$ ${item.price}'),
+                              Text(
+                                '\$ ${item.price}',
+                                style: const TextStyle(
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                               const Spacer(),
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  onItemClicked(item);
+                                },
                                 child: const Text('Details >'),
                               ),
                             ],
@@ -63,8 +77,14 @@ class ItemWidget extends StatelessWidget {
               return Card(
                 margin: const EdgeInsets.all(4),
                 child: ListTile(
+                  onTap: () {
+                    onItemClicked(item);
+                  },
                   tileColor: Colors.white,
-                  leading: Image.network(item.image),
+                  leading: Hero(
+                    tag: Key(item.id.toString()),
+                    child: Image.network(item.image),
+                  ),
                   title: Text(item.name),
                   subtitle: Text(item.desc),
                   trailing: Text(

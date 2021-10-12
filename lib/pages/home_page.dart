@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_codepur/models/catalog.dart';
+import 'package:flutter_codepur/pages/item_details_page.dart';
 import 'package:flutter_codepur/widgets/item_widget.dart';
 import 'package:flutter_codepur/widgets/main_drawer.dart';
 
@@ -51,7 +52,7 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               sKey.currentState!.openEndDrawer();
             },
-            icon: const Icon(CupertinoIcons.money_dollar_circle),
+            icon: const Icon(CupertinoIcons.cart),
           )
         ],
       ),
@@ -64,7 +65,19 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: CatalogModel.products.isNotEmpty
-          ? const ItemWidget(isGrid: true)
+          ? ItemWidget(
+              onItemClicked: (item) {
+                //Navigator.push(context, MaterialPageRoute(builder: (context)=>ItemDetailsPage(item: item,),),),)
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ItemDetailsPage(item: item),
+                  ),
+                );
+              },
+              //isGrid: false,
+              isGrid: true,
+            )
           : const Center(child: CircularProgressIndicator()),
     );
   }
