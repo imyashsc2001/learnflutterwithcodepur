@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_codepur/models/catalog.dart';
+import 'package:flutter_codepur/widgets/item_widget.dart';
 import 'package:flutter_codepur/widgets/main_drawer.dart';
 
 class HomePage extends StatelessWidget {
@@ -30,9 +32,13 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      body: const Center(
-        child: Text('Hi'),
-      ),
+      body: ListView.builder(
+          itemCount: CatalogModel.products.length,
+          itemBuilder: (context, index) {
+            return ItemWidget(
+              item: CatalogModel.products[index],
+            );
+          }),
     );
   }
 }
